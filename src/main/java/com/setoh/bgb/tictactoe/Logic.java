@@ -2,6 +2,7 @@ package com.setoh.bgb.tictactoe;
 
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
+import com.setoh.bgb.tictactoe.ai.AI;
 
 public class Logic {
 

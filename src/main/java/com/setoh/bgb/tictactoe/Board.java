@@ -62,4 +62,17 @@ public class Board {
         return emptyPositions;
     }
 
+    public List<Symbol[]> getLines() {
+        List<Symbol[]> lines = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            lines.add(new Symbol[]{grid[i][0], grid[i][1], grid[i][2]});
+        }
+        for (int j = 0; j < 3; j++) {
+            lines.add(new Symbol[]{grid[0][j], grid[1][j], grid[2][j]});
+        }
+        lines.add(new Symbol[]{grid[0][0], grid[1][1], grid[2][2]});
+        lines.add(new Symbol[]{grid[0][2], grid[1][1], grid[2][0]});
+        return lines;
+    }
+
 }

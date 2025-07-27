@@ -1,8 +1,9 @@
-package com.setoh.bgb.tictactoe;
+package com.setoh.bgb.tictactoe.ai;
 
 import java.util.List;
 import java.util.Random;
 
+import com.setoh.bgb.tictactoe.Board;
 import com.setoh.bgb.tictactoe.Board.Position;
 
 public class RandomAI implements AI {
