@@ -30,7 +30,10 @@ public class Board {
     }
 
     public Board(Board board) {
-        this.grid = Arrays.copyOf(board.grid, board.grid.length);
+        this.grid = new Symbol[3][3];
+        for (int i = 0; i < 3; i++) {
+            this.grid[i] = Arrays.copyOf(board.grid[i], board.grid[i].length);
+        }
     }
 
 
