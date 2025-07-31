@@ -13,8 +13,7 @@ public class RandomAI implements AI {
     public Position play(Board board){
         List<Position> emptyPositions = board.getEmptyPositions();
         int randomPositionIndex = random.nextInt(emptyPositions.size());
-        Position randomPosition = emptyPositions.get(randomPositionIndex);
-        return randomPosition;
+        return emptyPositions.get(randomPositionIndex);
     }
 
 }

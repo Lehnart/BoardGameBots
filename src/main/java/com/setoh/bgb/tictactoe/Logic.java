@@ -38,13 +38,7 @@ public class Logic {
     }
 
     public boolean isGameOver() {
-        if(board.isGameFull()){
-            return true;
-        }
-        if(getWinner()!=Symbol.EMPTY){
-            return true;
-        }
-            return false;
+        return board.isGameFull() || getWinner() != Symbol.EMPTY;
     }
 
     public Symbol getWinner() {

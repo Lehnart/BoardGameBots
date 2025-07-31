@@ -10,7 +10,7 @@ public class BasicExplorator implements Explorator<Board.Position> {
 
     @Override
     public Map<Board.Position, Double> explore(Board board, Symbol currentPlayer, Evaluator evaluator) {
-        Map<Board.Position, Double> scores = new HashMap<Board.Position, Double>();
+        Map<Board.Position, Double> scores = new HashMap<>();
         for(Board.Position position : board.getEmptyPositions()) {
             Board newBoard = new Board(board);
             newBoard.setSymbol(position, currentPlayer);

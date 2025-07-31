@@ -1,6 +1,7 @@
 package com.setoh.bgb.tictactoe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
@@ -29,12 +30,7 @@ public class Board {
     }
 
     public Board(Board board) {
-        grid = new Symbol[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                grid[i][j] = board.grid[i][j];
-            }
-        }
+        this.grid = Arrays.copyOf(board.grid, board.grid.length);
     }
 
 

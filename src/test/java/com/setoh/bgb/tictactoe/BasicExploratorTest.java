@@ -1,13 +1,12 @@
 package com.setoh.bgb.tictactoe;
 
-import static org.junit.Assert.assertThat;
-
-import java.time.format.SignStyle;
 import java.util.Map;
 
 import org.assertj.core.data.Offset;
 import org.junit.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
 import com.setoh.bgb.tictactoe.ai.BasicEvaluator;
