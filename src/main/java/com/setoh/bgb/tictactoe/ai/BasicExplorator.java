@@ -12,7 +12,9 @@ public class BasicExplorator implements Explorator<Board.Position> {
     public Map<Board.Position, Double> explore(Board board, Symbol currentPlayer, Evaluator evaluator) {
         Map<Board.Position, Double> scores = new HashMap<Board.Position, Double>();
         for(Board.Position position : board.getEmptyPositions()) {
-            Double score = evaluator.evaluate(board, currentPlayer);
+            Board newBoard = new Board(board);
+            newBoard.setSymbol(position, currentPlayer);
+            Double score = evaluator.evaluate(newBoard, currentPlayer);
             scores.put(position, score);
         }
         return scores;

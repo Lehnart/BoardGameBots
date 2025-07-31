@@ -28,6 +28,16 @@ public class Board {
         }
     }
 
+    public Board(Board board) {
+        grid = new Symbol[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = board.grid[i][j];
+            }
+        }
+    }
+
+
     public Symbol getSymbol(Position position) {
         return grid[position.row][position.col];
     }

@@ -27,27 +27,15 @@ public class BasicEvaluator implements Evaluator {
 
     @Override
     public double evaluate(Board board, Symbol currentPlayer) {
-        double score = 0.;
         List<Symbol[]> lines = board.getLines();
         for (Symbol[] line : lines) {
             SymbolCount lineCount = countSymbols(line, currentPlayer);
-            score += computeScore(lineCount);
-        }
-        return score;
-    }
-
-    private double computeScore(SymbolCount lineCount) {
-        Integer emptyCount = lineCount.emptyCount();
-        Integer currentPlayerCount = lineCount.currentPlayerCount();
-        Integer opponentCount = lineCount.opponentCount();
-        if (emptyCount == 0) {
-            if (currentPlayerCount == 3) {
+            if (lineCount.currentPlayerCount == 3) {
                 return 1.;
-            } else if (opponentCount == 3) {
+            } else if (lineCount.opponentCount == 3) {
                 return 0.;
             }
-        } 
+        }
         return 0.5;
     }
-
 }
