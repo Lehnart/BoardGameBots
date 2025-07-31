@@ -25,16 +25,10 @@ public class Logic {
     }
 
     private void play() {
-        AI currentAI;
-        if(currentSymbolToPlay == Symbol.X){
-            currentAI = xAI;
-            currentSymbolToPlay = Symbol.O;
-        } else {
-            currentAI = oAI;
-            currentSymbolToPlay = Symbol.X;
-        }
-        Position position = currentAI.play(board);
+        AI currentAI = currentSymbolToPlay == Symbol.X ? xAI : oAI;
+        Position position = currentAI.play(board, currentSymbolToPlay);
         board.setSymbol(position, currentSymbolToPlay);
+        currentSymbolToPlay = currentSymbolToPlay == Symbol.X ? Symbol.O : Symbol.X;
     }
 
     public boolean isGameOver() {
