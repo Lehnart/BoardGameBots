@@ -1,7 +1,6 @@
 package com.setoh.bgb.tictactoe;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +26,14 @@ public class ConfrontationTest {
         Confrontation.Result result2 = results.get(1);
         Confrontation.Result result3 = results.get(2);
 
-        assertThat(result1.firstAIIndex()).isEqualTo(0);
+        assertThat(result1.firstAIIndex()).isZero();
         assertThat(result1.secondAIIndex()).isEqualTo(1);
         assertThat(result1.firstAIWins() + result1.secondAIWins() + result1.draws()).isEqualTo(100);
         assertThat(result1.firstAIWins()).isGreaterThan(0);
         assertThat(result1.secondAIWins()).isGreaterThan(0);
         assertThat(result1.draws()).isGreaterThan(0);
 
-        assertThat(result2.firstAIIndex()).isEqualTo(0);
+        assertThat(result2.firstAIIndex()).isZero();
         assertThat(result2.secondAIIndex()).isEqualTo(2);
         assertThat(result2.firstAIWins() + result2.secondAIWins() + result2.draws()).isEqualTo(100);
         assertThat(result2.firstAIWins()).isGreaterThan(0);
