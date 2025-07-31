@@ -32,6 +32,7 @@ public class Confrontation {
         int firstAIWins = 0;
         int secondAIWins = 0;
         int draws = 0;
+
         AI firstAI = aiList.get(firstAIIndex);
         AI secondAI = aiList.get(secondAIIndex);
         Match match = new Match();
@@ -40,7 +41,7 @@ public class Confrontation {
             switch (winner) {
                 case FIRST_AI -> firstAIWins++;
                 case SECOND_AI -> secondAIWins++;
-                case DRAW -> draws++;
+                default -> draws++;
             }
         }
         return new Result(firstAIIndex, secondAIIndex, firstAIWins, secondAIWins, draws);
