@@ -20,7 +20,6 @@ public class BasicAITest {
         BasicAI basicAI = new BasicAI();
         Position move = basicAI.play(board, Symbol.X);
 
-        assertThat(move).isNotNull();
-        assertThat(move).isEqualTo(new Position(0, 2));
+        assertThat(move).isNotNull().isEqualTo(new Position(0, 2));
     }
 }
