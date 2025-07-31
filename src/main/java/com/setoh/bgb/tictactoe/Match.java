@@ -7,7 +7,7 @@ import com.setoh.bgb.tictactoe.ai.AI;
 
 public class Match {
 
-    public static enum Winner{
+    public enum Winner{
         FIRST_AI, SECOND_AI, DRAW
     }
 
