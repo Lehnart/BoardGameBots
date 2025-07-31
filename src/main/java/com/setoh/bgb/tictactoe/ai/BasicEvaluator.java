@@ -14,10 +14,11 @@ public class BasicEvaluator implements Evaluator {
         int currentPlayerCount = 0;
         int opponentCount = 0;
         for (Symbol symbol : line) {
-            if (symbol == Symbol.EMPTY) {
-                emptyCount++;
-            } else if (symbol == currentPlayer) {
+            if (symbol == currentPlayer) {
                 currentPlayerCount++;
+            } 
+            else if (symbol == Symbol.EMPTY) {
+                emptyCount++;
             } else {
                 opponentCount++;
             }
