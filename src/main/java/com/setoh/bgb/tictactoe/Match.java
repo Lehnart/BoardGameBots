@@ -1,6 +1,6 @@
 package com.setoh.bgb.tictactoe;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import com.setoh.bgb.tictactoe.Board.Symbol;
 import com.setoh.bgb.tictactoe.ai.AI;
@@ -11,7 +11,7 @@ public class Match {
         FIRST_AI, SECOND_AI, DRAW
     }
 
-    private Random random = new Random();
+    private SecureRandom random = new SecureRandom();
 
     public Winner play(AI firstAI, AI secondAI) {
         boolean doesFirstAIStarts = random.nextBoolean();
