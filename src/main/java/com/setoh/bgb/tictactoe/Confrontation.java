@@ -20,7 +20,7 @@ public class Confrontation {
     public List<Result> run() {
         List<Result> results = new ArrayList<>();
         for (int i = 0; i < aiList.size(); i++) {
-            for (int j = i + 1; j < aiList.size(); j++) {
+            for (int j = i; j < aiList.size(); j++) {
                 Result result = confront(i, j);
                 results.add(result);
             }
