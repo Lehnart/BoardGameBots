@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.setoh.bgb.tictactoe.ai.AI;
-import com.setoh.bgb.tictactoe.ai.BasicAI;
 import com.setoh.bgb.tictactoe.ai.RandomAI;
 
 public class ConfrontationTest {
