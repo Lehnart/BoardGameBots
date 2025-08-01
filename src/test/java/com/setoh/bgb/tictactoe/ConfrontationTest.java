@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.Test;
 
 import com.setoh.bgb.tictactoe.ai.AI;
+import com.setoh.bgb.tictactoe.ai.BasicAI;
 import com.setoh.bgb.tictactoe.ai.RandomAI;
 
 public class ConfrontationTest {
-
     @Test
     public void testConfrontation() {
         List<AI> aiList = new ArrayList<>();
@@ -21,10 +21,10 @@ public class ConfrontationTest {
 
         Confrontation confrontation = new Confrontation(aiList, 100);
         List<Confrontation.Result> results = confrontation.run();
-        assertThat(results).isNotEmpty().hasSize(3);
-        Confrontation.Result result1 = results.get(0);
-        Confrontation.Result result2 = results.get(1);
-        Confrontation.Result result3 = results.get(2);
+        assertThat(results).isNotEmpty().hasSize(6);
+        Confrontation.Result result1 = results.get(1);
+        Confrontation.Result result2 = results.get(2);
+        Confrontation.Result result3 = results.get(4);
 
         assertThat(result1.firstAIIndex()).isZero();
         assertThat(result1.secondAIIndex()).isEqualTo(1);
