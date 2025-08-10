@@ -9,7 +9,7 @@ public class GameTreeTest {
     @Test
     public void testAddNode() {
         GameTree gameTree = new GameTree();
-        GameTree.GameTreeNode node = new GameTree.GameTreeNode();
+        GameTree.GameTreeNode node = new GameTree.GameTreeNode(){};
 
         assertThat(gameTree.isIn(node)).isFalse();
         gameTree.addNode(node);
@@ -19,8 +19,8 @@ public class GameTreeTest {
     @Test
     public void testAddEdge() {
         GameTree gameTree = new GameTree();
-        GameTree.GameTreeNode from = new GameTree.GameTreeNode();
-        GameTree.GameTreeNode to = new GameTree.GameTreeNode();
+        GameTree.GameTreeNode from = new GameTree.GameTreeNode(){};
+        GameTree.GameTreeNode to = new GameTree.GameTreeNode(){};
         assertThat(gameTree.isIn(from)).isFalse();
         assertThat(gameTree.isIn(to)).isFalse();
 

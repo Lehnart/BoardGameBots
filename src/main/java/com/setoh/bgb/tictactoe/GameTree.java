@@ -7,15 +7,13 @@ import java.util.Map;
 
 public class GameTree {
 
-    public static class GameTreeNode {
+    public static interface GameTreeNode {
     }
 
     private Map<GameTreeNode, List<GameTreeNode>> adjacencyMap = new HashMap<>();
 
     public void addNode(GameTreeNode node) {
-        if(!adjacencyMap.containsKey(node)) {
-            adjacencyMap.put(node, new ArrayList<>());
-        }
+        adjacencyMap.computeIfAbsent(node, n -> new ArrayList<>());
     }
 
     public void addEdge(GameTreeNode from, GameTreeNode to) {
