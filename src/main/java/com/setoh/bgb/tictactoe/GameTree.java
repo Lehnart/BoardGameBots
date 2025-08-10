@@ -19,9 +19,7 @@ public class GameTree {
     public void addEdge(GameTreeNode from, GameTreeNode to) {
         addNode(from);
         addNode(to);
-        if (adjacencyMap.containsKey(from)) {
-            adjacencyMap.get(from).add(to);
-        }
+        adjacencyMap.get(from).add(to);
     }
 
     public List<GameTreeNode> getChildren(GameTreeNode node) {

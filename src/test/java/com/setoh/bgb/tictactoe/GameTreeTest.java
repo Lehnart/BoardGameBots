@@ -21,8 +21,11 @@ public class GameTreeTest {
         GameTree gameTree = new GameTree();
         GameTree.GameTreeNode from = new GameTree.GameTreeNode(){};
         GameTree.GameTreeNode to = new GameTree.GameTreeNode(){};
+        
         assertThat(gameTree.isIn(from)).isFalse();
         assertThat(gameTree.isIn(to)).isFalse();
+        assertThat(gameTree.getChildren(from)).isEmpty();
+        assertThat(gameTree.getChildren(to)).isEmpty();
 
         gameTree.addNode(from);
         gameTree.addNode(to);
