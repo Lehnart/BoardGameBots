@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.setoh.bgb.tictactoe.Board;
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
-import com.setoh.bgb.tictactoe.ai.BasicAI;
 
 public class BasicAITest {
 

@@ -10,8 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.setoh.bgb.tictactoe.Board;
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
-import com.setoh.bgb.tictactoe.ai.BasicEvaluator;
-import com.setoh.bgb.tictactoe.ai.BasicExplorator;
 
 public class BasicExploratorTest {
     @Test
