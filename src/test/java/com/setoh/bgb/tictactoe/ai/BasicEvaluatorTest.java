@@ -1,13 +1,13 @@
-package com.setoh.bgb.tictactoe;
+package com.setoh.bgb.tictactoe.ai;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.data.Offset;
 import org.junit.Test;
 
+import com.setoh.bgb.tictactoe.Board;
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
-import com.setoh.bgb.tictactoe.ai.BasicEvaluator;
 
 public class BasicEvaluatorTest {
     @Test
