@@ -7,8 +7,7 @@ import java.util.Map;
 
 public class GameTree {
 
-    public static interface GameTreeNode {
-    }
+    public static record GameTreeNode(Board board){}
 
     private Map<GameTreeNode, List<GameTreeNode>> adjacencyMap = new HashMap<>();
 
