@@ -2,6 +2,8 @@ package com.setoh.bgb.tictactoe;
 
 import org.junit.Test;
 
+import com.setoh.bgb.tictactoe.GameTree.GameTreeNode;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTreeTest {
@@ -9,7 +11,8 @@ public class GameTreeTest {
     @Test
     public void testAddNode() {
         GameTree gameTree = new GameTree();
-        GameTree.GameTreeNode node = new GameTree.GameTreeNode(){};
+        Board board = new Board();
+        GameTreeNode node = new GameTreeNode(board);
 
         assertThat(gameTree.isIn(node)).isFalse();
         gameTree.addNode(node);
@@ -19,8 +22,9 @@ public class GameTreeTest {
     @Test
     public void testAddEdge() {
         GameTree gameTree = new GameTree();
-        GameTree.GameTreeNode from = new GameTree.GameTreeNode(){};
-        GameTree.GameTreeNode to = new GameTree.GameTreeNode(){};
+        Board board = new Board();
+        GameTreeNode from = new GameTreeNode(board);
+        GameTreeNode to = new GameTreeNode(board);
         
         assertThat(gameTree.isIn(from)).isFalse();
         assertThat(gameTree.isIn(to)).isFalse();

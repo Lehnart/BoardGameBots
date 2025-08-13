@@ -84,4 +84,29 @@ public class Board {
         return lines;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Board)) return false;
+        Board other = (Board) obj;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (this.getSymbol(new Position(i, j)) != other.getSymbol(new Position(i, j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result = 31 * result + getSymbol(new Position(i, j)).hashCode();
+            }
+        }
+        return result;
+    }
 }

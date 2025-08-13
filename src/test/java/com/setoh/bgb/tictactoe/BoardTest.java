@@ -117,4 +117,24 @@ public class BoardTest {
  
     }
 
+    @Test
+    public void testEqualsAndHashcode() {
+        Board board1 = new Board();
+        Board board2 = new Board();
+        Board board3 = new Board();
+        board3.setSymbol(new Position(0, 0), Symbol.X);
+
+        assertThat(board1).isEqualTo(board2);
+        assertThat(board1.hashCode()).isEqualTo(board2.hashCode());
+
+        assertThat(board1).isNotEqualTo(board3);
+        assertThat(board2).isNotEqualTo(board3);
+
+        assertThat(board1.hashCode()).isNotEqualTo(board3.hashCode());
+        assertThat(board2.hashCode()).isNotEqualTo(board3.hashCode());  
+
+        board2.setSymbol(new Position(0, 0), Symbol.X);
+        assertThat(board3).isEqualTo(board2);
+        assertThat(board3.hashCode()).isEqualTo(board2.hashCode());
+    }
 }
