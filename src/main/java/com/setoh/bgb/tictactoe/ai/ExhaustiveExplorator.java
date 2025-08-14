@@ -1,8 +1,6 @@
 package com.setoh.bgb.tictactoe.ai;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.setoh.bgb.tictactoe.Board;
@@ -36,7 +34,6 @@ public class ExhaustiveExplorator {
         statesToExplore.clear();
         statesToExplore.addAll(nextStatesToExplore);
         nextStatesToExplore.clear();
-        System.out.println("Exploring " + statesToExplore.size() + " states");
         for (State state : statesToExplore) {
             exploreState(gameTree, state);
         }

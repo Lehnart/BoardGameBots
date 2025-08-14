@@ -1,7 +1,5 @@
 package com.setoh.bgb.tictactoe.ai;
 
-import java.util.Map;
-
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
