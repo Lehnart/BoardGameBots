@@ -46,6 +46,17 @@ public class BoardTest {
         assertThat(oboard.getSymbol(new Position(2, 2))).isEqualTo(Symbol.X);
     }
 
+    @Test 
+    public void testCopy(){
+        Board board = new Board();
+        board.setSymbol(new Position(0, 0), Symbol.X);
+        Board copiedBoard = board.copy();
+        board.setSymbol(new Position(1, 0), Symbol.X);
+        assertThat(copiedBoard.getSymbol(new Position(0, 0))).isEqualTo(Symbol.X);
+        assertThat(copiedBoard.getSymbol(new Position(1, 0))).isEqualTo(Symbol.EMPTY);
+        assertThat(copiedBoard).isNotSameAs(board); 
+    }
+
     @Test
     public void testPosition() {
         assertThatThrownBy(() -> new Position(-1, 0))

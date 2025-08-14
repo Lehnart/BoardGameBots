@@ -19,7 +19,7 @@ public class Logic {
     }
 
     public void run(){
-        while(!isGameOver()){
+        while(!isGameOver(this.board)){
             play();
         }
     }
@@ -32,10 +32,18 @@ public class Logic {
     }
 
     public boolean isGameOver() {
-        return board.isGameFull() || getWinner() != Symbol.EMPTY;
+        return Logic.isGameOver(board);
+    }
+    
+    public Symbol getWinner() {
+        return Logic.getWinner(board);
     }
 
-    public Symbol getWinner() {
+    public static boolean isGameOver(Board board) {
+        return board.isGameFull() || getWinner(board) != Symbol.EMPTY;
+    }
+
+    public static Symbol getWinner(Board board) {
         for (int i = 0; i < 3; i++) {
             if (board.getSymbol(new Position(i, 0)) == board.getSymbol(new Position(i, 1)) &&
                 board.getSymbol(new Position(i, 1)) == board.getSymbol(new Position(i, 2)) &&

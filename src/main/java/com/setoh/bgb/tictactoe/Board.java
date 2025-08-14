@@ -36,7 +36,10 @@ public class Board {
         }
     }
 
-
+    public Board copy() {
+        return new Board(this);
+    }
+    
     public Symbol getSymbol(Position position) {
         return grid[position.row][position.col];
     }
