@@ -7,10 +7,17 @@ import java.util.Map;
 
 public class GameTree {
 
-    public static record Node(Board board){}
+    public static record Node(State state){}
 
     private Map<Node, List<Node>> adjacencyMap = new HashMap<>();
 
+    public GameTree() {
+    }
+
+    public GameTree(Node firstNode) {
+        addNode(firstNode);
+    }
+    
     public void addNode(Node node) {
         adjacencyMap.computeIfAbsent(node, n -> new ArrayList<>());
     }
