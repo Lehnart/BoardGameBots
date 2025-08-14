@@ -7,28 +7,35 @@ import java.util.Map;
 
 public class GameTree {
 
-    public static record GameTreeNode(Board board){}
+    public static record Node(State state){}
 
-    private Map<GameTreeNode, List<GameTreeNode>> adjacencyMap = new HashMap<>();
+    private Map<Node, List<Node>> adjacencyMap = new HashMap<>();
 
-    public void addNode(GameTreeNode node) {
+    public GameTree() {
+    }
+
+    public GameTree(Node firstNode) {
+        addNode(firstNode);
+    }
+    
+    public void addNode(Node node) {
         adjacencyMap.computeIfAbsent(node, n -> new ArrayList<>());
     }
 
-    public void addEdge(GameTreeNode from, GameTreeNode to) {
+    public void addEdge(Node from, Node to) {
         addNode(from);
         addNode(to);
         adjacencyMap.get(from).add(to);
     }
 
-    public List<GameTreeNode> getChildren(GameTreeNode node) {
+    public List<Node> getChildren(Node node) {
         if (adjacencyMap.containsKey(node)) {
             return adjacencyMap.get(node);
         }
         return List.of();
     }
 
-    public boolean isIn(GameTreeNode node) {
+    public boolean isIn(Node node) {
         return adjacencyMap.containsKey(node);
     }
 }
