@@ -1,0 +1,30 @@
+package com.setoh.bgb.tictactoe.ai;
+
+import com.setoh.bgb.tictactoe.Board;
+import com.setoh.bgb.tictactoe.GameTree;
+import com.setoh.bgb.tictactoe.Board.Position;
+import com.setoh.bgb.tictactoe.Board.Symbol;
+
+public class ExhaustiveAI implements AI {
+
+    private ExhaustiveExplorator explorator = new ExhaustiveExplorator();
+    private GameTree tree;
+
+    public ExhaustiveAI() {
+        this.tree = explorator.explore(new Board(), Symbol.X);
+    }
+
+    public Position play(Board board, Symbol playerSymbol) {
+        ExhaustiveEvaluator evaluator = new ExhaustiveEvaluator(tree);
+        Board nextBestBoard = evaluator.findNextBestBoard(board, playerSymbol);
+        for (Position position : board.getEmptyPositions()) {
+            Board copiedBoard = board.copy();
+            copiedBoard.setSymbol(position, playerSymbol);
+            if (copiedBoard.equals(nextBestBoard)) {
+                return position;
+            }
+        }
+        return board.getEmptyPositions().get(0);
+    }
+
+}
