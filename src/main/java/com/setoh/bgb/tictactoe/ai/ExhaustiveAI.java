@@ -15,16 +15,17 @@ public class ExhaustiveAI implements AI {
     }
 
     public Position play(Board board, Symbol playerSymbol) {
+        Position nextPosition = null;
         ExhaustiveEvaluator evaluator = new ExhaustiveEvaluator(tree);
         Board nextBestBoard = evaluator.findNextBestBoard(board, playerSymbol);
         for (Position position : board.getEmptyPositions()) {
             Board copiedBoard = board.copy();
             copiedBoard.setSymbol(position, playerSymbol);
             if (copiedBoard.equals(nextBestBoard)) {
-                return position;
+                nextPosition = position;
             }
         }
-        return board.getEmptyPositions().get(0);
+        return nextPosition;
     }
 
 }

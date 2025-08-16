@@ -33,7 +33,7 @@ public class ExhaustiveEvaluator {
         return bestNode.state().board().copy();
     }
 
-    private double evaluateMax(List<Node> children, Symbol currentPlayer) {
+    double evaluateMax(List<Node> children, Symbol currentPlayer) {
         double maxEvaluation = Double.NEGATIVE_INFINITY;
         for (Node child : children) {
             double evaluation = evaluateNodeMax(child, currentPlayer);
@@ -44,7 +44,7 @@ public class ExhaustiveEvaluator {
         return maxEvaluation;
     }
 
-    private double evaluateNodeMax(Node node, Symbol currentPlayer) {
+    double evaluateNodeMax(Node node, Symbol currentPlayer) {
         State state = node.state();
         Board board = state.board();
         if (Logic.isGameOver(board)) {
@@ -54,7 +54,7 @@ public class ExhaustiveEvaluator {
         return evaluateMin(nextChildren, currentPlayer);
     }
 
-    private double evaluateMin(List<Node> children, Symbol currentPlayer) {
+    double evaluateMin(List<Node> children, Symbol currentPlayer) {
         double minEvaluation = Double.POSITIVE_INFINITY;
         for (Node child : children) {
             double evaluation = evaluateNodeMin(child, currentPlayer);
@@ -65,7 +65,7 @@ public class ExhaustiveEvaluator {
         return minEvaluation;
     }
 
-    private double evaluateNodeMin(Node node, Symbol currentPlayer) {
+    double evaluateNodeMin(Node node, Symbol currentPlayer) {
         State state = node.state();
         Board board = state.board();
         if (Logic.isGameOver(board)) {
@@ -76,7 +76,7 @@ public class ExhaustiveEvaluator {
         }
     }
 
-    private double evaluateGameOverBoard(Board board, Symbol currentPlayer) {
+    static double evaluateGameOverBoard(Board board, Symbol currentPlayer) {
         Symbol winner = Logic.getWinner(board);
         if (winner == currentPlayer) {
             return 1.;

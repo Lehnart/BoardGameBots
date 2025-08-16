@@ -15,8 +15,8 @@ public class Main {
         AI randomAI = new RandomAI();
         AI exhaustiveAI = new ExhaustiveAI();
         Confrontation confrontation = new Confrontation(List.of(randomAI, basicAi, exhaustiveAI), 100);
-        List<Result> resulst = confrontation.run();
-        for (Result result : resulst) {
+        List<Result> results = confrontation.run();
+        for (Result result : results) {
             System.out.printf("AI %d vs AI %d: %d wins, %d wins, %d draws%n",
                     result.firstAIIndex(),
                     result.secondAIIndex(), 
