@@ -2,20 +2,13 @@ package com.setoh.bgb.cantstop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.File;
 import java.util.List;
-
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import com.setoh.bgb.cantstop.Logic.DiceCombination;
 import com.setoh.bgb.cantstop.ai.RandomAI;
 
 public class LogicTest {
-
-    @Rule
-    public TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
     @Test
     public void testColumnToProgressWhenAllCombinationsAreValid() {

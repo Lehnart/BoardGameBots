@@ -27,9 +27,9 @@ public class Logic {
         this.ai = aiPlayer;
     }
 
-    public Board playGame(String csvFileName){
+    public Board playGame() {
         Board state = new Board();
-        while(state.getColumnClaimedCount() < 3){
+        while (state.getColumnClaimedCount() < 3) {
             playTurn(state);
         }
         return state;
@@ -79,7 +79,7 @@ public class Logic {
 
     static List<List<Integer>> getColumnsToProgress(DiceCombination combination, Board state) {
         List<List<Integer>> columnList = new ArrayList<>();
-        if (canProgressOnColumns(List.of(combination.getFirstSum(),combination.getSecondSum()), state)) {
+        if (canProgressOnColumns(List.of(combination.getFirstSum(), combination.getSecondSum()), state)) {
             columnList.add(List.of(combination.getFirstSum(), combination.getSecondSum()));
         } else {
             if (canProgressOnColumns(List.of(combination.getFirstSum()), state)) {
