@@ -4,7 +4,6 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -134,5 +133,14 @@ public class BoardTest {
         board.temporaryProgress(12);
         board.progress();
         assertThat(board.getColumnClaimedCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void testGetColumnHeight() {
+        Board board = new Board();
+        assertThat(board.getColumnHeight(2)).isEqualTo(3);
+        assertThatThrownBy(() -> board.getColumnHeight(1))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("Column 1 is not a valid column key.");
     }
 }
