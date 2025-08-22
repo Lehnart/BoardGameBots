@@ -57,12 +57,12 @@ public class LogicTest {
 
     @Test
     public void testRollDice() {
-        assertThat(Logic.rollDice()).isPositive().isLessThanOrEqualTo(6);
+        assertThat(Logic.rollDice(6)).isPositive().isLessThanOrEqualTo(6);
     }
 
     @Test
     public void testRollDices() {
-        assertThat(Logic.rollDices()).hasSize(4);
+        assertThat(Logic.rollDices(6)).hasSize(4);
     }
 
     @Test
