@@ -1,17 +1,18 @@
 package com.setoh.bgb.tictactoe.ai;
 
+import com.setoh.bgb.ai.GameTree;
 import com.setoh.bgb.tictactoe.Board;
-import com.setoh.bgb.tictactoe.GameTree;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
 
 public class ExhaustiveAI implements AI {
 
     private ExhaustiveExplorator explorator = new ExhaustiveExplorator();
-    private GameTree tree;
+    private GameTree<TicTacToeState> tree;
 
     public ExhaustiveAI() {
-        this.tree = explorator.explore(new Board(), Symbol.X);
+        this.tree = explorator.explore(new TicTacToeState(new Board(), Symbol.X));
     }
 
     public Position play(Board board, Symbol playerSymbol) {
