@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.setoh.bgb.ai.GameTreeExplorator;
 import com.setoh.bgb.ai.GameTree;
 import com.setoh.bgb.ai.GameTree.Node;
 import com.setoh.bgb.tictactoe.Board;

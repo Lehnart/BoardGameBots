@@ -25,8 +25,8 @@ public class ExhaustiveExplorator extends GameTreeExplorator<TicTacToeState> {
             Board nextBoard = board.copy();
             nextBoard.setSymbol(p, state.symbol());
             TicTacToeState nextState = new TicTacToeState(nextBoard, symbol == Symbol.X ? Symbol.O : Symbol.X);
-            gameTree.addNode(new GameTree.Node<TicTacToeState>(nextState));
-            gameTree.addEdge(new GameTree.Node<TicTacToeState>(state), new GameTree.Node<TicTacToeState>(nextState));
+            gameTree.addNode(new GameTree.Node<>(nextState));
+            gameTree.addEdge(new GameTree.Node<>(state), new GameTree.Node<>(nextState));
             nextStatesToExplore.add(nextState);
         }
     }

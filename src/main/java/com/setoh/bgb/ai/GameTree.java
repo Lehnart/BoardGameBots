@@ -6,21 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 
-public class GameTree <State> {
+public class GameTree <S> {
 
-    public static class Node <State> {
-        private final State state;
+    public static class Node <S> {
+        private final S state;
 
-        public Node(State state) {
+        public Node(S state) {
             this.state = state;
         }
 
-        public State state() {
+        public S state() {
             return state;
         }
         
         @Override
         public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
             Node<?> other = (Node<?>) obj;
             return state == null ? other.state == null : state.equals(other.state);
         }
@@ -31,33 +34,33 @@ public class GameTree <State> {
         }
     }
 
-    private Map<Node<State>, List<Node<State>>> adjacencyMap = new HashMap<>();
+    private Map<Node<S>, List<Node<S>>> adjacencyMap = new HashMap<>();
 
     public GameTree() {
     }
 
-    public GameTree(Node<State> firstNode) {
+    public GameTree(Node<S> firstNode) {
         addNode(firstNode);
     }
     
-    public void addNode(Node<State> node) {
+    public void addNode(Node<S> node) {
         adjacencyMap.computeIfAbsent(node, n -> new ArrayList<>());
     }
 
-    public void addEdge(Node<State> from, Node<State> to) {
+    public void addEdge(Node<S> from, Node<S> to) {
         addNode(from);
         addNode(to);
         adjacencyMap.get(from).add(to);
     }
 
-    public List<Node<State>> getChildren(Node<State> node) {
+    public List<Node<S>> getChildren(Node<S> node) {
         if (adjacencyMap.containsKey(node)) {
             return adjacencyMap.get(node);
         }
         return List.of();
     }
 
-    public boolean isIn(Node<State> node) {
+    public boolean isIn(Node<S> node) {
         return adjacencyMap.containsKey(node);
     }
 }
