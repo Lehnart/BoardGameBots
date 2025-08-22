@@ -2,13 +2,13 @@ package com.setoh.bgb.tictactoe.ai;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 import org.junit.Test;
 
+import com.setoh.bgb.ai.GameTree;
 import com.setoh.bgb.tictactoe.Board;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 import com.setoh.bgb.tictactoe.Board.Position;
 import com.setoh.bgb.tictactoe.Board.Symbol;
-import com.setoh.bgb.tictactoe.GameTree;
 
 public class ExhaustiveEvaluatorTest {
 
@@ -48,7 +48,7 @@ public class ExhaustiveEvaluatorTest {
         board.setSymbol(new Position(1, 2), Symbol.X);
 
         ExhaustiveExplorator explorator = new ExhaustiveExplorator();
-        GameTree tree = explorator.explore(board, Symbol.X);
+        GameTree<TicTacToeState> tree = explorator.explore(new TicTacToeState(board, Symbol.X));
         ExhaustiveEvaluator evaluator = new ExhaustiveEvaluator(tree);
         Board nextBestBoard = evaluator.findNextBestBoard(board, Symbol.X);
         Board expectedBoard = board.copy();

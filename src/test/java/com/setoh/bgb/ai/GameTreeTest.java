@@ -1,9 +1,12 @@
-package com.setoh.bgb.tictactoe;
+package com.setoh.bgb.ai;
 
 import org.junit.Test;
 
+import com.setoh.bgb.ai.GameTree.Node;
+import com.setoh.bgb.tictactoe.Board;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 import com.setoh.bgb.tictactoe.Board.Position;
-import com.setoh.bgb.tictactoe.GameTree.Node;
+import com.setoh.bgb.tictactoe.Board.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,17 +16,17 @@ public class GameTreeTest {
     public void testConstructor() {
         Board board = new Board();
         board.setSymbol(new Position(0, 0), Board.Symbol.X);
-        State state = new State(board, Board.Symbol.X);
-        Node initialNode = new Node(state);
-        GameTree gameTree = new GameTree(initialNode);
+        TicTacToeState state = new TicTacToeState(board, Board.Symbol.X);
+        Node<TicTacToeState> initialNode = new Node<>(state);
+        GameTree<TicTacToeState> gameTree = new GameTree<>(initialNode);
         assertThat(gameTree.isIn(initialNode)).isTrue();
     }
 
     @Test
     public void testAddNode() {
-        GameTree gameTree = new GameTree();
+        GameTree<TicTacToeState> gameTree = new GameTree<>();
         Board board = new Board();
-        Node node = new Node(new State(board, Board.Symbol.X));
+        Node<TicTacToeState> node = new Node<>(new TicTacToeState(board, Board.Symbol.X));
 
         assertThat(gameTree.isIn(node)).isFalse();
         gameTree.addNode(node);
@@ -31,11 +34,21 @@ public class GameTreeTest {
     }
 
     @Test
+    public void testNodeEquality() {
+        Node<TicTacToeState> node1 = new Node<>(new TicTacToeState(new Board(), Symbol.X));
+        Node<TicTacToeState> node2 = new Node<>(new TicTacToeState(new Board(), Symbol.O));
+        assertThat(node1)
+            .isNotEqualTo(node2)
+            .isNotEqualTo(null)
+            .isNotEqualTo(new Object());
+    }
+
+    @Test
     public void testAddEdge() {
-        GameTree gameTree = new GameTree();
+        GameTree<TicTacToeState> gameTree = new GameTree<>();
         Board board = new Board();
-        Node from = new Node(new State(board, Board.Symbol.X));
-        Node to = new Node(new State(board, Board.Symbol.O));
+        Node<TicTacToeState> from = new Node<>(new TicTacToeState(board, Board.Symbol.X));
+        Node<TicTacToeState> to = new Node<>(new TicTacToeState(board, Board.Symbol.O));
         
         assertThat(gameTree.isIn(from)).isFalse();
         assertThat(gameTree.isIn(to)).isFalse();

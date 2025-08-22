@@ -2,28 +2,28 @@ package com.setoh.bgb.tictactoe.ai;
 
 import java.util.List;
 
+import com.setoh.bgb.ai.GameTree;
+import com.setoh.bgb.ai.GameTree.Node;
 import com.setoh.bgb.tictactoe.Board;
 import com.setoh.bgb.tictactoe.Board.Symbol;
-import com.setoh.bgb.tictactoe.GameTree;
 import com.setoh.bgb.tictactoe.Logic;
-import com.setoh.bgb.tictactoe.GameTree.Node;
-import com.setoh.bgb.tictactoe.State;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 
 public class ExhaustiveEvaluator {
 
-    private final GameTree gameTree;
+    private final GameTree<TicTacToeState> gameTree;
 
-    public ExhaustiveEvaluator(GameTree gameTree) {
+    public ExhaustiveEvaluator(GameTree<TicTacToeState> gameTree) {
         this.gameTree = gameTree;
     }
 
     public Board findNextBestBoard(Board board, Symbol currentPlayer) {
-        State initialState = new State(board, currentPlayer);
-        List<Node> children = gameTree.getChildren(new Node(initialState));
+        TicTacToeState initialState = new TicTacToeState(board, currentPlayer);
+        List<Node<TicTacToeState>> children = gameTree.getChildren(new Node<>(initialState));
 
-        Node bestNode = children.get(0);
+        Node<TicTacToeState> bestNode = children.get(0);
         double bestEvaluation = evaluateNodeMax(bestNode, currentPlayer);
-        for (Node child : children) {
+        for (Node<TicTacToeState> child : children) {
             double evaluation = evaluateNodeMax(child, currentPlayer);
             if (evaluation > bestEvaluation) {
                 bestEvaluation = evaluation;
@@ -33,9 +33,9 @@ public class ExhaustiveEvaluator {
         return bestNode.state().board().copy();
     }
 
-    double evaluateMax(List<Node> children, Symbol currentPlayer) {
+    double evaluateMax(List<Node<TicTacToeState>> children, Symbol currentPlayer) {
         double maxEvaluation = Double.NEGATIVE_INFINITY;
-        for (Node child : children) {
+        for (Node<TicTacToeState> child : children) {
             double evaluation = evaluateNodeMax(child, currentPlayer);
             if (evaluation>maxEvaluation){
                 maxEvaluation = evaluation;
@@ -44,19 +44,19 @@ public class ExhaustiveEvaluator {
         return maxEvaluation;
     }
 
-    double evaluateNodeMax(Node node, Symbol currentPlayer) {
-        State state = node.state();
+    double evaluateNodeMax(Node<TicTacToeState> node, Symbol currentPlayer) {
+        TicTacToeState state = node.state();
         Board board = state.board();
         if (Logic.isGameOver(board)) {
             return evaluateGameOverBoard(board, currentPlayer);
         } 
-        List<Node> nextChildren = gameTree.getChildren(node);
+        List<Node<TicTacToeState>> nextChildren = gameTree.getChildren(node);
         return evaluateMin(nextChildren, currentPlayer);
     }
 
-    double evaluateMin(List<Node> children, Symbol currentPlayer) {
+    double evaluateMin(List<Node<TicTacToeState>> children, Symbol currentPlayer) {
         double minEvaluation = Double.POSITIVE_INFINITY;
-        for (Node child : children) {
+        for (Node<TicTacToeState> child : children) {
             double evaluation = evaluateNodeMin(child, currentPlayer);
             if (evaluation < minEvaluation) {
                 minEvaluation = evaluation;
@@ -65,13 +65,13 @@ public class ExhaustiveEvaluator {
         return minEvaluation;
     }
 
-    double evaluateNodeMin(Node node, Symbol currentPlayer) {
-        State state = node.state();
+    double evaluateNodeMin(Node<TicTacToeState> node, Symbol currentPlayer) {
+        TicTacToeState state = node.state();
         Board board = state.board();
         if (Logic.isGameOver(board)) {
             return evaluateGameOverBoard(board, currentPlayer);
         } else {
-            List<Node> nextChildren = gameTree.getChildren(node);
+            List<Node<TicTacToeState>> nextChildren = gameTree.getChildren(node);
             return evaluateMax(nextChildren, currentPlayer);
         }
     }

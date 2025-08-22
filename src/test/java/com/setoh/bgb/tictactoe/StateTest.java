@@ -10,8 +10,8 @@ public class StateTest {
     public void testStateCopy() {
         Board board = new Board();
         board.setSymbol(new Board.Position(0, 0), Board.Symbol.X);
-        State originalState = new State(board, Board.Symbol.X);
-        State copiedState = originalState.copy();
+        TicTacToeState originalState = new TicTacToeState(board, Board.Symbol.X);
+        TicTacToeState copiedState = originalState.copy();
 
         assertThat(copiedState.board()).isEqualTo(originalState.board());
         assertThat(copiedState.symbol()).isEqualTo(originalState.symbol());

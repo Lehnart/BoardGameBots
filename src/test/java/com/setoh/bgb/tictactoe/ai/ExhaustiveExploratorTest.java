@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.setoh.bgb.ai.GameTree;
+import com.setoh.bgb.ai.GameTree.Node;
 import com.setoh.bgb.tictactoe.Board;
-import com.setoh.bgb.tictactoe.GameTree;
-import com.setoh.bgb.tictactoe.GameTree.Node;
-import com.setoh.bgb.tictactoe.State;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 import com.setoh.bgb.tictactoe.Board.Symbol;
 
 public class ExhaustiveExploratorTest {
@@ -25,15 +25,15 @@ public class ExhaustiveExploratorTest {
         board.setSymbol(new Board.Position(2, 0), Symbol.O);
         
         ExhaustiveExplorator explorator = new ExhaustiveExplorator();
-        GameTree tree = explorator.explore(board, Symbol.X);
+        GameTree<TicTacToeState> tree = explorator.explore(new TicTacToeState(board, Symbol.X));
         assertThat(tree).isNotNull();
 
         Board winnningBoard = board.copy();
         winnningBoard.setSymbol(new Board.Position(2, 2), Symbol.X);
-        assertThat(tree.isIn(new Node(new State(winnningBoard, Symbol.O)))).isTrue();
+        assertThat(tree.isIn(new Node<TicTacToeState>(new TicTacToeState(winnningBoard, Symbol.O)))).isTrue();
 
         Board impossibleBoard = winnningBoard.copy();
         impossibleBoard.setSymbol(new Board.Position(2, 1), Symbol.O);
-        assertThat(tree.isIn(new Node(new State(winnningBoard, Symbol.X)))).isFalse();
+        assertThat(tree.isIn(new Node<TicTacToeState>(new TicTacToeState(winnningBoard, Symbol.X)))).isFalse();
     }
 }
