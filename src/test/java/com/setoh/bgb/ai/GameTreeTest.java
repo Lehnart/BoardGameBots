@@ -1,10 +1,12 @@
-package com.setoh.bgb.tictactoe;
+package com.setoh.bgb.ai;
 
 import org.junit.Test;
 
-import com.setoh.bgb.ai.GameTree;
 import com.setoh.bgb.ai.GameTree.Node;
+import com.setoh.bgb.tictactoe.Board;
+import com.setoh.bgb.tictactoe.TicTacToeState;
 import com.setoh.bgb.tictactoe.Board.Position;
+import com.setoh.bgb.tictactoe.Board.Symbol;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +31,16 @@ public class GameTreeTest {
         assertThat(gameTree.isIn(node)).isFalse();
         gameTree.addNode(node);
         assertThat(gameTree.isIn(node)).isTrue();
+    }
+
+    @Test
+    public void testNodeEquality() {
+        Node<TicTacToeState> node1 = new Node<>(new TicTacToeState(new Board(), Symbol.X));
+        Node<TicTacToeState> node2 = new Node<>(new TicTacToeState(new Board(), Symbol.O));
+        assertThat(node1)
+            .isNotEqualTo(node2)
+            .isNotEqualTo(null)
+            .isNotEqualTo(new Object());
     }
 
     @Test

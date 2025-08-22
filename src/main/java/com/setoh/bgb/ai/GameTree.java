@@ -25,12 +25,12 @@ public class GameTree <S> {
                 return false;
             }
             Node<?> other = (Node<?>) obj;
-            return state == null ? other.state == null : state.equals(other.state);
+            return state.equals(other.state);
         }
 
         @Override
         public int hashCode() {
-            return state == null ? 0 : state.hashCode();
+            return state.hashCode();
         }
     }
 
