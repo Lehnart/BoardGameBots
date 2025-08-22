@@ -1,12 +1,12 @@
 package com.setoh.bgb.cantstop;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Board {
 
-    public static final Map<Integer, Integer> COLUMN_HEIGHTS = Map.ofEntries(
+    public static final Map<Integer, Integer> DEFAULT_COLUMN_HEIGHTS = Map.ofEntries(
         Map.entry(2, 3), 
         Map.entry(3, 5),
         Map.entry(4, 7), 
@@ -20,28 +20,24 @@ public class Board {
         Map.entry(12, 3)
     );
 
-    private final Map<Integer, Integer> playerHeightsPerColumn = new HashMap<>(
-        Map.ofEntries(
-            Map.entry(2, 0), 
-            Map.entry(3, 0), 
-            Map.entry(4, 0), 
-            Map.entry(5, 0), 
-            Map.entry(6, 0),        
-            Map.entry(7, 0),
-            Map.entry(8, 0), 
-            Map.entry(9, 0),
-            Map.entry(10, 0),
-            Map.entry(11, 0), 
-            Map.entry(12, 0)
-        )
-    );
-
+    private final Map<Integer, Integer> columnHeights = new HashMap<>();
+    private final Map<Integer, Integer> playerHeightsPerColumn = new HashMap<>();
     private final Map<Integer, Integer> temporaryHeights = new HashMap<>();
-
     private int turn = 1;
 
-    public List<Integer> columns() {
-        return List.of(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    public Board() {
+        this(DEFAULT_COLUMN_HEIGHTS);
+    }
+
+    public Board(Map<Integer, Integer> columnHeights) {
+        this.columnHeights.putAll(columnHeights);
+        for (int column : columns()) {
+            playerHeightsPerColumn.put(column, 0);
+        }
+    }
+
+    public Set<Integer> columns() {
+        return columnHeights.keySet();
     }
 
     public int getTurn() {
@@ -66,8 +62,15 @@ public class Board {
         return 0;
     }
 
+    public int getColumnHeight(int column) {
+        if (!columns().contains(column)) {
+            throw new IllegalArgumentException("Column " + column + " is not a valid column key.");
+        }
+        return columnHeights.get(column);
+    }
+
     public boolean isColumnClaimed(int column) {
-        return getPlayerHeight(column) >= COLUMN_HEIGHTS.get(column);
+        return getPlayerHeight(column) >= getColumnHeight(column);
     }
 
     public void temporaryProgress(int column) {

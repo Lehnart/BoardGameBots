@@ -4,8 +4,8 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class BoardTest {
 
@@ -15,9 +15,9 @@ public class BoardTest {
         assertThat(Map.ofEntries(
                 Map.entry(2, 3), Map.entry(3, 5), Map.entry(4, 7), Map.entry(5, 9), Map.entry(6, 11), Map.entry(7, 13),
                 Map.entry(8, 11), Map.entry(9, 9), Map.entry(10, 7), Map.entry(11, 5), Map.entry(12, 3))).isEqualTo(
-                        Board.COLUMN_HEIGHTS);
+                        Board.DEFAULT_COLUMN_HEIGHTS);
         assertThat(board.getTurn()).isOne();
-        assertThat(board.columns()).isEqualTo(List.of(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
+        assertThat(board.columns()).isEqualTo(Set.of(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
         assertThat(board.getTemporaryHeights()).isEmpty();
         for (int column : board.columns()) {
             assertThat(board.getPlayerHeight(column)).isZero();
@@ -44,20 +44,18 @@ public class BoardTest {
     @Test
     public void testTemporaryHeight() {
         Board board = new Board();
-        for(int column : board.columns()){
+        for (int column : board.columns()) {
             assertThat(board.getTemporaryHeight(column)).isZero();
         }
         board.temporaryProgress(2);
-        for(int column : board.columns()){
-            if(column==2){
+        for (int column : board.columns()) {
+            if (column == 2) {
                 assertThat(board.getTemporaryHeight(column)).isEqualTo(1);
-            }
-            else{
+            } else {
                 assertThat(board.getTemporaryHeight(column)).isZero();
             }
         }
     }
-
 
     @Test
     public void testProgress() {
@@ -135,5 +133,14 @@ public class BoardTest {
         board.temporaryProgress(12);
         board.progress();
         assertThat(board.getColumnClaimedCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void testGetColumnHeight() {
+        Board board = new Board();
+        assertThat(board.getColumnHeight(2)).isEqualTo(3);
+        assertThatThrownBy(() -> board.getColumnHeight(1))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("Column 1 is not a valid column key.");
     }
 }

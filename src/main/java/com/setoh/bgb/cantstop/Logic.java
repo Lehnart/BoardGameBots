@@ -20,11 +20,16 @@ public class Logic {
     }
 
     private static Random random = new Random();
-
+    private int nDiceFaces;
     private AI ai;
 
     public Logic(AI aiPlayer) {
+        this(aiPlayer, 6);
+    }
+
+    public Logic(AI aiPlayer, int nDiceFaces) {
         this.ai = aiPlayer;
+        this.nDiceFaces = nDiceFaces;
     }
 
     public Board playGame() {
@@ -51,7 +56,7 @@ public class Logic {
     }
 
     private List<Integer> chooseColumns(Board state) {
-        List<Integer> dices = rollDices();
+        List<Integer> dices = rollDices(nDiceFaces);
         List<List<Integer>> columnsToProgress = getColumnsToProgress(dices, state);
         List<Integer> chosenColumns = ai.chooseCombination(columnsToProgress);
         if (!chosenColumns.isEmpty()) {
@@ -69,12 +74,12 @@ public class Logic {
         return List.of(c1, c2, c3).stream().flatMap(c -> getColumnsToProgress(c, state).stream()).toList();
     }
 
-    public static List<Integer> rollDices() {
-        return List.of(rollDice(), rollDice(), rollDice(), rollDice());
+    public static List<Integer> rollDices(int nDiceFaces) {
+        return List.of(rollDice(nDiceFaces), rollDice(nDiceFaces), rollDice(nDiceFaces), rollDice(nDiceFaces));
     }
 
-    static int rollDice() {
-        return random.nextInt(6) + 1;
+    static int rollDice(int nDiceFaces) {
+        return random.nextInt(nDiceFaces) + 1;
     }
 
     static List<List<Integer>> getColumnsToProgress(DiceCombination combination, Board state) {
@@ -102,7 +107,7 @@ public class Logic {
         Map<Integer, Integer> temporaryHeights = state.getTemporaryHeights();
         for (int column : columns) {
             if (temporaryHeights.containsKey(column)) {
-                if (temporaryHeights.get(column) >= Board.COLUMN_HEIGHTS.get(column)) {
+                if (temporaryHeights.get(column) >= state.getColumnHeight(column)) {
                     return false;
                 }
                 temporaryHeights.put(column, temporaryHeights.get(column) + 1);
