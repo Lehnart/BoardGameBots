@@ -21,7 +21,7 @@ public class GameTree <S> {
         
         @Override
         public boolean equals(Object obj) {
-            if (obj == null) {
+            if (obj == null || this.getClass() != obj.getClass()) {
                 return false;
             }
             Node<?> other = (Node<?>) obj;
