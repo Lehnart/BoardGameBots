@@ -15,16 +15,16 @@ public class GameTreeTest {
         Board board = new Board();
         board.setSymbol(new Position(0, 0), Board.Symbol.X);
         TicTacToeState state = new TicTacToeState(board, Board.Symbol.X);
-        Node initialNode = new Node(state);
-        GameTree gameTree = new GameTree(initialNode);
+        Node<TicTacToeState> initialNode = new Node<>(state);
+        GameTree<TicTacToeState> gameTree = new GameTree<>(initialNode);
         assertThat(gameTree.isIn(initialNode)).isTrue();
     }
 
     @Test
     public void testAddNode() {
-        GameTree gameTree = new GameTree();
+        GameTree<TicTacToeState> gameTree = new GameTree<>();
         Board board = new Board();
-        Node node = new Node(new TicTacToeState(board, Board.Symbol.X));
+        Node<TicTacToeState> node = new Node<>(new TicTacToeState(board, Board.Symbol.X));
 
         assertThat(gameTree.isIn(node)).isFalse();
         gameTree.addNode(node);
@@ -33,10 +33,10 @@ public class GameTreeTest {
 
     @Test
     public void testAddEdge() {
-        GameTree gameTree = new GameTree();
+        GameTree<TicTacToeState> gameTree = new GameTree<>();
         Board board = new Board();
-        Node from = new Node(new TicTacToeState(board, Board.Symbol.X));
-        Node to = new Node(new TicTacToeState(board, Board.Symbol.O));
+        Node<TicTacToeState> from = new Node<>(new TicTacToeState(board, Board.Symbol.X));
+        Node<TicTacToeState> to = new Node<>(new TicTacToeState(board, Board.Symbol.O));
         
         assertThat(gameTree.isIn(from)).isFalse();
         assertThat(gameTree.isIn(to)).isFalse();
