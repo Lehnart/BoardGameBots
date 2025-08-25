@@ -120,15 +120,4 @@ public class Board {
         result = 31 * result + temporaryHeights.hashCode();
         return result;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Board{\n");
-        sb.append("  columnHeights=").append(columnHeights).append(",\n");
-        sb.append("  playerHeightsPerColumn=").append(playerHeightsPerColumn).append(",\n");
-        sb.append("  temporaryHeights=").append(temporaryHeights).append("\n");
-        sb.append('}');
-        return sb.toString();
-    }
 }
