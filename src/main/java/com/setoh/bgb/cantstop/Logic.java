@@ -34,10 +34,14 @@ public class Logic {
 
     public Board playGame() {
         Board state = new Board();
-        while (state.getColumnClaimedCount() < 3) {
+        while (!isGameOver(state)) {
             playTurn(state);
         }
         return state;
+    }
+
+    public static boolean isGameOver(Board state) {
+        return state.getColumnClaimedCount() >= 3;
     }
 
     public void playTurn(Board state) {
@@ -115,7 +119,7 @@ public class Logic {
                 if (temporaryHeights.size() == 3) {
                     return false;
                 }
-                temporaryHeights.put(column, state.getPlayerHeight(column));
+                temporaryHeights.put(column, state.getPlayerHeight(column)+1);
             }
         }
         return true;

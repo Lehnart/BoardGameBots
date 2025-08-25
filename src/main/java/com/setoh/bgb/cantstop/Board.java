@@ -23,7 +23,6 @@ public class Board {
     private final Map<Integer, Integer> columnHeights = new HashMap<>();
     private final Map<Integer, Integer> playerHeightsPerColumn = new HashMap<>();
     private final Map<Integer, Integer> temporaryHeights = new HashMap<>();
-    private int turn = 1;
 
     public Board() {
         this(DEFAULT_COLUMN_HEIGHTS);
@@ -36,12 +35,17 @@ public class Board {
         }
     }
 
-    public Set<Integer> columns() {
-        return columnHeights.keySet();
+    public Board copy() {
+        Board copy = new Board(this.columnHeights);
+        for (int column : columns()) {
+            copy.playerHeightsPerColumn.put(column, this.playerHeightsPerColumn.get(column));
+        }
+        copy.temporaryHeights.putAll(this.temporaryHeights);
+        return copy;
     }
 
-    public int getTurn() {
-        return turn;
+    public Set<Integer> columns() {
+        return columnHeights.keySet();
     }
 
     public int getPlayerHeight(int column) {
@@ -82,12 +86,10 @@ public class Board {
         for (Map.Entry<Integer, Integer> columnAndHeight : temporaryHeights.entrySet()) {
             playerHeightsPerColumn.put(columnAndHeight.getKey(), columnAndHeight.getValue());
         }
-        turn += 1;
         temporaryHeights.clear();
     }
 
     public void failToProgress() {
-        turn += 1;
         temporaryHeights.clear();
     }
 
@@ -99,5 +101,23 @@ public class Board {
             }
         }
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board = (Board) o;
+        return columnHeights.equals(board.columnHeights)
+                && playerHeightsPerColumn.equals(board.playerHeightsPerColumn)
+                && temporaryHeights.equals(board.temporaryHeights);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = columnHeights.hashCode();
+        result = 31 * result + playerHeightsPerColumn.hashCode();
+        result = 31 * result + temporaryHeights.hashCode();
+        return result;
     }
 }
