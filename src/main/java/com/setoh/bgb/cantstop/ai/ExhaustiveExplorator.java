@@ -52,7 +52,7 @@ public class ExhaustiveExplorator extends AleatoryGameTreeExplorator<CantStopSta
             for(DiceRollProbability drp : diceRollProbabilities){
                 CantStopState nextState = new CantStopState(board.copy(), drp.diceRolls(), CantStopState.Action.CHOOSE_COLUMNS);
                 gameTree.addState(nextState);
-                gameTree.addTransition(state, new AleatoryTransition<CantStopState>(state, nextState, drp.probability));
+                gameTree.addTransition(state, new AleatoryTransition<>(state, nextState, drp.probability));
                 nextStatesToExplore.add(nextState);
             }
         }
@@ -63,16 +63,16 @@ public class ExhaustiveExplorator extends AleatoryGameTreeExplorator<CantStopSta
                 nextBoard.failToProgress();
                 CantStopState nextState = new CantStopState(nextBoard, null, CantStopState.Action.ROLL_DICE);
                 gameTree.addState(nextState);
-                gameTree.addTransition(state, new Choice<CantStopState>(state, nextState));
+                gameTree.addTransition(state, new Choice<>(state, nextState));
                 nextStatesToExplore.add(nextState);
             }
             else {
                 for(List<Integer> columns: columnChoices){
                     Board nextBoard = board.copy();
-                    columns.forEach(col -> nextBoard.temporaryProgress(col));
+                    columns.forEach(nextBoard::temporaryProgress);
                     CantStopState nextState = new CantStopState(nextBoard, null, CantStopState.Action.DECIDE_TO_CONTINUE_OR_NOT);
                     gameTree.addState(nextState);
-                    gameTree.addTransition(state, new Choice<CantStopState>(state, nextState));
+                    gameTree.addTransition(state, new Choice<>(state, nextState));
                     nextStatesToExplore.add(nextState);
                 }
             }
@@ -82,12 +82,12 @@ public class ExhaustiveExplorator extends AleatoryGameTreeExplorator<CantStopSta
             nextBoardStop.progress();
             CantStopState nextStateStop = new CantStopState(nextBoardStop, null, CantStopState.Action.ROLL_DICE);
             gameTree.addState(nextStateStop);
-            gameTree.addTransition(state, new Choice<CantStopState>(state, nextStateStop));
+            gameTree.addTransition(state, new Choice<>(state, nextStateStop));
             nextStatesToExplore.add(nextStateStop);
 
             CantStopState nextStateContinue = new CantStopState(board.copy(), null, CantStopState.Action.ROLL_DICE);
             gameTree.addState(nextStateContinue);
-            gameTree.addTransition(state, new Choice<CantStopState>(state, nextStateContinue));
+            gameTree.addTransition(state, new Choice<>(state, nextStateContinue));
             nextStatesToExplore.add(nextStateContinue);
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public record CantStopState (Board board, List<Integer> diceRolls, Action action) {
     
-    public static enum Action{
+    public enum Action{
         ROLL_DICE,
         CHOOSE_COLUMNS,
         DECIDE_TO_CONTINUE_OR_NOT

@@ -159,9 +159,7 @@ public class BoardTest {
     public void testEqualsAndHashCode() {
         Board board1 = new Board();
         Board board2 = new Board();
-        assertThat(board1).isEqualTo(board1).hasSameHashCodeAs(board1);
-        assertThat(board1).isNotEqualTo(null);
-        assertThat(board1).isEqualTo(board2).hasSameHashCodeAs(board2);
+        assertThat(board1).isEqualTo(board1).hasSameHashCodeAs(board1).isNotEqualTo(null).isEqualTo(board2).hasSameHashCodeAs(board2);
         board1.temporaryProgress(2);
         assertThat(board1).isNotEqualTo(board2);
         board2.temporaryProgress(2);
