@@ -12,6 +12,7 @@ public abstract class AleatoryGameTreeExplorator<S> {
         AleatoryGameTree<S> gameTree = initialize(initialState);
         while (!nextStatesToExplore.isEmpty()) {
             exploreNextStates(gameTree);
+            nextStatesToExplore.removeIf(s -> gameTree.isIn(s) && !gameTree.getTransitions(s).isEmpty());
         }
         return gameTree;
     }

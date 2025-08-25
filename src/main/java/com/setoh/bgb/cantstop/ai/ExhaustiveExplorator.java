@@ -24,6 +24,18 @@ public class ExhaustiveExplorator extends AleatoryGameTreeExplorator<CantStopSta
 
     );
 
+    private final List<DiceRollProbability> diceRollProbabilities; 
+
+    public ExhaustiveExplorator() {
+        this(twoFaceDiceProbabilityDistribution);
+    }
+
+    public ExhaustiveExplorator(List<DiceRollProbability> diceRollProbabilities) {
+        super();
+        this.diceRollProbabilities = diceRollProbabilities;
+    }
+
+
     @Override
     protected void exploreState(AleatoryGameTree<CantStopState> gameTree, CantStopState state) {
         Board currentBoard = state.board();
@@ -37,8 +49,8 @@ public class ExhaustiveExplorator extends AleatoryGameTreeExplorator<CantStopSta
         List<Integer> diceRolls = state.diceRolls();
         CantStopState.Action action = state.action();
         if (action == CantStopState.Action.ROLL_DICE) {
-            for(DiceRollProbability drp : twoFaceDiceProbabilityDistribution){
-                CantStopState nextState = new CantStopState(board.copy(), null, CantStopState.Action.CHOOSE_COLUMNS);
+            for(DiceRollProbability drp : diceRollProbabilities){
+                CantStopState nextState = new CantStopState(board.copy(), drp.diceRolls(), CantStopState.Action.CHOOSE_COLUMNS);
                 gameTree.addState(nextState);
                 gameTree.addTransition(state, new AleatoryTransition<CantStopState>(state, nextState, drp.probability));
                 nextStatesToExplore.add(nextState);

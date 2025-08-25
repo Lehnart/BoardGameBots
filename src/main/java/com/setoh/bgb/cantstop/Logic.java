@@ -119,7 +119,7 @@ public class Logic {
                 if (temporaryHeights.size() == 3) {
                     return false;
                 }
-                temporaryHeights.put(column, state.getPlayerHeight(column));
+                temporaryHeights.put(column, state.getPlayerHeight(column)+1);
             }
         }
         return true;

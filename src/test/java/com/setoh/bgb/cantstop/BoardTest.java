@@ -142,4 +142,35 @@ public class BoardTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("Column 1 is not a valid column key.");
     }
+
+    @Test
+    public void testCopy() {
+        Board board = new Board();
+        board.temporaryProgress(5);
+        board.progress();
+        board.temporaryProgress(2);
+        Board copy = board.copy();
+        assertThat(copy).isNotSameAs(board);
+        assertThat(copy.getTemporaryHeights()).isEqualTo(board.getTemporaryHeights());
+        assertThat(copy.getPlayerHeight(5)).isEqualTo(board.getPlayerHeight(5)).isEqualTo(1);
+    }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        Board board1 = new Board();
+        Board board2 = new Board();
+        assertThat(board1).isEqualTo(board1).hasSameHashCodeAs(board1);
+        assertThat(board1).isNotEqualTo(null);
+        assertThat(board1).isEqualTo(board2).hasSameHashCodeAs(board2);
+        board1.temporaryProgress(2);
+        assertThat(board1).isNotEqualTo(board2);
+        board2.temporaryProgress(2);
+        assertThat(board1).isEqualTo(board2).hasSameHashCodeAs(board2);
+        board1.progress();
+        assertThat(board1).isNotEqualTo(board2);
+        board2.progress();
+        assertThat(board1).isEqualTo(board2).hasSameHashCodeAs(board2);
+        board1.temporaryProgress(3);
+        assertThat(board1).isNotEqualTo(board2);
+    }
 }

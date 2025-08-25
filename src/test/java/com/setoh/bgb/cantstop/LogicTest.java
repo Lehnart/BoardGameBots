@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.setoh.bgb.cantstop.Logic.DiceCombination;
 import com.setoh.bgb.cantstop.ai.RandomAI;
@@ -136,6 +137,39 @@ public class LogicTest {
         logic.playTurn(state);
         for (int column : state.columns()) {
             assertThat(state.getPlayerHeight(column)).isZero();
+        }
+    }
+
+    @Test
+    public void testIsGameOver() {
+        Board state = new Board();
+
+        assertThat(Logic.isGameOver(state)).isFalse();
+
+        state.temporaryProgress(2);
+        state.temporaryProgress(2);
+        state.temporaryProgress(2);
+        
+        state.temporaryProgress(3);
+        state.temporaryProgress(3);
+        state.temporaryProgress(3);
+        state.temporaryProgress(3);
+        state.temporaryProgress(3);
+        
+        state.temporaryProgress(12);
+        state.temporaryProgress(12);
+        state.temporaryProgress(12);
+        
+        state.progress();
+        assertThat(Logic.isGameOver(state)).isTrue();
+    }
+
+    @Test  
+    public void testPlayGame() {
+        Logic logic = new Logic(new RandomAI(0.));
+        try (var mocked = Mockito.mockStatic(Logic.class)) {
+            mocked.when(() -> Logic.isGameOver(Mockito.any(Board.class))).thenReturn(true);
+            assertThat(logic.playGame()).isEqualTo(new Board());
         }
     }
 
